@@ -4,10 +4,9 @@ const Schema = mongoose.Schema
 
 const Comment = new Schema(
   {
-    // post: { type: Schema.Types.ObjectId, ref: 'Post' },
     author: String,
-    content: String
-
+    content: String,
+    // post_id: { type: Schema.Types.ObjectId, ref: 'posts'}
   }
 )
 

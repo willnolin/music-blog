@@ -1,12 +1,6 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-
-// const comment = new Schema({
-//   author: String,
-//   content: String
-// })
-
 const Post = new Schema(
   {
     title: { type: String, required: true },

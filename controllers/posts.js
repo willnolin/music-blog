@@ -1,12 +1,9 @@
 import Post from "../models/post.js"
-import Comment from "../models/comment.js"
+// import Comment from "../models/comment.js"
 
-// app.get("/", (req, res) => res.send("This is the root!"))
-
-//get all posts
 export const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find()
+    const posts = await Post.find().populate("comments")
     res.json(posts)
   } catch (error) {
     console.log(error)
@@ -63,16 +60,18 @@ export const deletePost = async (req, res) => {
     res.status(500).json({error: error.message})
   }
 }
-
-export const createComment = async (req, res) => {
+////////////////// POSTS WITH COMMENTS //////////////////////////////////
+export const showPostComments = async (req, res) => {
+  try {
     const { id } = req.params
-    const updatedPost = await Comment.create(req.body)
-      .then(postComment => {
-        console.log("Comment Created:", postComment)
-        return Post.findByIdAndUpdate(id,
-          { $push: { comments: postComment._id } }, { new: true, useFindAndModify: false }
-        );
-      });
-  res.status(200).json(updatedPost);
+    const post = await Post.findById(id).populate("comments")
+    post.comments.forEach(comment => console.log(comment.id))
+    res.json(post.comments)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({error: error.message})
+  }
 }
+
+
 

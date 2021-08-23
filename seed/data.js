@@ -9,7 +9,7 @@ const insertData = async () => {
   const posts = [{
     title: "durian",
     author: "billy bob",
-    content: "This is a post about the durian fruit"
+    content: "This is a post about the durian fruit",
   },
   {
     title: "poppy",
