@@ -2,11 +2,11 @@ import Comment from '../models/comment.js';
 import Post from '../models/post.js';
 
 export const createComment = async (req, res) => {
-  const { id } = req.params
+  const { slug } = req.params
   const updatedPost = await Comment.create(req.body)
-    .then(postComment => {
+  .then(postComment => {
       console.log("Comment Created:", postComment)
-      return Post.findByIdAndUpdate(id,
+      return Post.findOneAndUpdate({slug: slug},
         { $push: { comments: postComment._id } }, { new: true, useFindAndModify: false }
       );
     });
@@ -27,10 +27,10 @@ export const updateComment = async (req, res) => {
 export const deleteComment = async (req, res) => {
   try {
     const { id } = req.params
-    const { post_id } = req.params
+    const { slug } = req.params
     const deleted = await Comment.findByIdAndDelete(id)
     if (deleted) {
-      await Post.findByIdAndUpdate(post_id,
+      await Post.findOneAndUpdate({slug : slug},
         { $pull: { comments: id } })
       return res.status(200).json("Comment deleted")
     }

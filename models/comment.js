@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+import slugify from 'slugify'
 const Schema = mongoose.Schema
 
 const Comment = new Schema(

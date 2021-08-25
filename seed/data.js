@@ -10,21 +10,25 @@ const insertData = async () => {
     title: "durian",
     author: "billy bob",
     content: "This is a post about the durian fruit",
+    ratings: [1,3,5,2,4]
   },
   {
     title: "poppy",
     author: "willy bob",
-    content: "This is a post about the Wizard of Oz!!!!!  YEEAAYY"
+    content: "This is a post about the Wizard of Oz!!!!!  YEEAAYY",
+    ratings: [1,3,5,1,1,1,1,1,1,1,1,2,4]
   },
   {
     title: "dragonfruit",
     author: "chilly bob",
-    content: "This is a dragonfruit post"
+    content: "This is a dragonfruit post",
+    ratings: [1,3,2,2,2,2,2,5,2,4]
   },
   {
     title: "will",
     author: "silly bob",
-    content: "This is a post about will, wow"
+    content: "This is a post about will, wow",
+    ratings: [1,3,5,5,4,5,5,5,4,5,2,4]
   },
   {
     title: "leavitt",
