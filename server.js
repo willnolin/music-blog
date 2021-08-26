@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000
 //middleware i.e. third party plugins for the express framework
 app.use(express.json())  //express's json parser
 app.use(logger('dev')) // adds logging capability, keeps track of requests and what path they took
+app.use(cors())
 
 app.use('/api', routes) // use express router
 

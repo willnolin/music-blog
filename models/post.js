@@ -8,13 +8,14 @@ const Post = new Schema(
     title: { type: String, required: true },
     author: { type: String, required: true },
     content: { type: String, required: true },
+    language: { type: String, reguired: true },
     comments: [
       {
         type: Schema.Types.ObjectId,
         ref: "comments"
       }
     ],
-    ratings: [ 
+    ratings: [
       { type: Number, min: 1, max: 5 }
     ],
     slug: {
@@ -23,10 +24,13 @@ const Post = new Schema(
       unique: true
     }
   },
-  { timestamps: true }
-)
+  { timestamps: true, toJSON: { virtuals: true } }
+);
+
 Post.virtual('average').get(function () {
-  return Math.round(this.ratings.reduce((avg, rating) => avg += rating)/this.ratings.length)
+  return Math.round(this.ratings.reduce((avg, rating) => {
+    return avg += rating
+  }, 0) / this.ratings.length)
 });
 
 Post.pre('validate', function(next) {
